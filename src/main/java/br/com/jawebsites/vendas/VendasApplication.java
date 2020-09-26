@@ -9,8 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.jawebsites.vendas.domain.Categoria;
 import br.com.jawebsites.vendas.domain.Cidade;
+import br.com.jawebsites.vendas.domain.Cliente;
+import br.com.jawebsites.vendas.domain.Endereco;
 import br.com.jawebsites.vendas.domain.Estado;
 import br.com.jawebsites.vendas.domain.Produto;
+import br.com.jawebsites.vendas.domain.enuns.TipoCliente;
 import br.com.jawebsites.vendas.repositories.CategoriaRepository;
 import br.com.jawebsites.vendas.repositories.CidadeRepository;
 import br.com.jawebsites.vendas.repositories.EstadoREpository;
@@ -77,8 +80,6 @@ public class VendasApplication implements CommandLineRunner  {
 		
 		repositorioEstado.saveAll(Arrays.asList(estado1,estado2,estado3,estado4));
 		repositorioCidade.saveAll(Arrays.asList(cidade1,cidade2,cidade3,cidade4,cidade5,cidade6,cidade7,cidade8));
-		
-		
 		
 	}
 	
