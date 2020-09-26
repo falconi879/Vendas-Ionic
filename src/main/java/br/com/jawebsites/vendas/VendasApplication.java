@@ -16,6 +16,8 @@ import br.com.jawebsites.vendas.domain.Produto;
 import br.com.jawebsites.vendas.domain.enuns.TipoCliente;
 import br.com.jawebsites.vendas.repositories.CategoriaRepository;
 import br.com.jawebsites.vendas.repositories.CidadeRepository;
+import br.com.jawebsites.vendas.repositories.ClienteREpository;
+import br.com.jawebsites.vendas.repositories.EnderecoRepository;
 import br.com.jawebsites.vendas.repositories.EstadoREpository;
 import br.com.jawebsites.vendas.repositories.ProdutoRepository;
 
@@ -33,6 +35,12 @@ public class VendasApplication implements CommandLineRunner  {
 	
 	@Autowired
 	private EstadoREpository repositorioEstado;
+	
+	@Autowired
+	private ClienteREpository repositoriCliente;
+	
+	@Autowired
+	private EnderecoRepository repositorioEndereco;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(VendasApplication.class, args);
@@ -81,6 +89,16 @@ public class VendasApplication implements CommandLineRunner  {
 		repositorioEstado.saveAll(Arrays.asList(estado1,estado2,estado3,estado4));
 		repositorioCidade.saveAll(Arrays.asList(cidade1,cidade2,cidade3,cidade4,cidade5,cidade6,cidade7,cidade8));
 		
+		Cliente cliente1 = new Cliente(null, "Vicente Falconi", "vicente@gmail.com", "123456789", TipoCliente.PESSOAFISICA);
+		cliente1.getTelefones().addAll(Arrays.asList("2222222222","33333333333","999999999999"));
+		
+		Endereco endereco1 = new Endereco(null, "Rua Salesólolis", "234", "casa 2", "Vila Bartira", "08577470", cliente1, cidade1);
+
+		Endereco endereco2 = new Endereco(null, "Av Itaquaquecetuba", "567", "casa 2", "Monte Belo", "08577000", cliente1, cidade1);
+		cliente1.getEndereco().addAll(Arrays.asList(endereco1,endereco2));
+		
+		repositoriCliente.saveAll(Arrays.asList(cliente1));
+		repositorioEndereco.saveAll(Arrays.asList(endereco1,endereco2));
 	}
 	
 
