@@ -16,7 +16,7 @@ import br.com.jawebsites.vendas.domain.Produto;
 import br.com.jawebsites.vendas.domain.enuns.TipoCliente;
 import br.com.jawebsites.vendas.repositories.CategoriaRepository;
 import br.com.jawebsites.vendas.repositories.CidadeRepository;
-import br.com.jawebsites.vendas.repositories.ClienteREpository;
+import br.com.jawebsites.vendas.repositories.ClienteRepository;
 import br.com.jawebsites.vendas.repositories.EnderecoRepository;
 import br.com.jawebsites.vendas.repositories.EstadoREpository;
 import br.com.jawebsites.vendas.repositories.ProdutoRepository;
@@ -37,7 +37,7 @@ public class VendasApplication implements CommandLineRunner  {
 	private EstadoREpository repositorioEstado;
 	
 	@Autowired
-	private ClienteREpository repositoriCliente;
+	private ClienteRepository repositoriCliente;
 	
 	@Autowired
 	private EnderecoRepository repositorioEndereco;
