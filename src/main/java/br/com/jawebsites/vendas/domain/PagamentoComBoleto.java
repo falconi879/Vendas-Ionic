@@ -2,8 +2,10 @@ package br.com.jawebsites.vendas.domain;
 
 import java.util.Date;
 
-import br.com.jawebsites.vendas.domain.enuns.EstadoPagamento;
+import javax.persistence.Entity;
 
+import br.com.jawebsites.vendas.domain.enuns.EstadoPagamento;
+@Entity
 public class PagamentoComBoleto extends Pagamento {
 	private static final long serialVersionUID = 1L;
 	
