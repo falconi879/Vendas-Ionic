@@ -14,15 +14,14 @@ import br.com.jawebsites.vendas.domain.enuns.EstadoPagamento;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pagamento implements Serializable{
+public abstract class Pagamento implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private Integer id;
 	private Integer estado;
-	private Endereco enderecoEntrega;
-	private Cliente cliente;
+	
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId
@@ -33,12 +32,10 @@ public class Pagamento implements Serializable{
 		
 	}
 
-	public Pagamento(Integer id, EstadoPagamento estado, Endereco enderecoEntrega, Cliente cliente, Pedido pedido) {
+	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
 		super();
 		this.id = id;
-		this.estado = estado.getCod();
-		this.enderecoEntrega = enderecoEntrega;
-		this.cliente = cliente;
+		this.estado = estado.getCod(); 
 		this.setPedido(pedido);
 		
 	}
@@ -52,30 +49,14 @@ public class Pagamento implements Serializable{
 	}
 
 	public EstadoPagamento getEstado() {
-		return EstadoPagamento.toEnum(id);
+		return EstadoPagamento.toEnum(estado);
 	}
 
 	public void setEstado(EstadoPagamento estado) {
 		this.estado = estado.getCod();
 	}
 
-	public Endereco getEnderecoEntrega() {
-		return enderecoEntrega;
-	}
-
-	public void setEnderecoEntrega(Endereco enderecoEntrega) {
-		this.enderecoEntrega = enderecoEntrega;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public Pedido getPedido() {
+		public Pedido getPedido() {
 		return pedido;
 	}
 
@@ -107,4 +88,5 @@ public class Pagamento implements Serializable{
 			return false;
 		return true;
 	}
+
 }
