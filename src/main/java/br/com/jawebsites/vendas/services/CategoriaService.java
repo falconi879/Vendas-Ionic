@@ -29,4 +29,8 @@ public class CategoriaService {
 		obj.setId(null);// garantir novo id
 		return repositorio.save(obj);
 	}
+	public Categoria alterar(Categoria obj) {
+		buscar(obj.getId());// ja faz a verificação do ID
+		return repositorio.save(obj);
+	}
 }
