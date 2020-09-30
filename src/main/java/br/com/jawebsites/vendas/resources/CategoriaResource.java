@@ -31,6 +31,6 @@ public class CategoriaResource {
 		Categoria objeto = servico.buscar(id);
 		return ResponseEntity.ok().body(objeto);
 	}
-	
+	/**Iniciando CRUD**/
 
 }
