@@ -33,4 +33,10 @@ public class CategoriaService {
 		buscar(obj.getId());// ja faz a verificação do ID
 		return repositorio.save(obj);
 	}
+	
+	public void deletar(Integer id) {
+		buscar(id); // usando o metodo para verificar se existe o id
+		repositorio.deleteById(id);
+	}
 }
+ 
