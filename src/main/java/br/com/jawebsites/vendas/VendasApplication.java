@@ -69,7 +69,13 @@ public class VendasApplication implements CommandLineRunner  {
 	public void run(String... args ) throws Exception {
 		Categoria categoria1 = new Categoria(null, "Informatica");
 		Categoria categoria2 = new Categoria(null, "Escritorio");
-		Categoria categoria3 = new Categoria(null, "Outros");
+		Categoria categoria3 = new Categoria(null, "Cama Mesa e Banho");
+		Categoria categoria4 = new Categoria(null, "Padaria");
+		Categoria categoria5 = new Categoria(null, "Marcenaria");
+		Categoria categoria6 = new Categoria(null, "Orti-frute");
+		Categoria categoria7 = new Categoria(null, "Frios");
+		Categoria categoria8 = new Categoria(null, "Bebidas");
+		Categoria categoria9 = new Categoria(null, "Livros");
 		
 		Produto produto1 = new Produto(null, "TV 40 Polegadas", 2.000);
 		Produto produto2 = new Produto(null, "Computador Dell", 3.000);
@@ -83,7 +89,7 @@ public class VendasApplication implements CommandLineRunner  {
 		produto3.getCategorias().addAll(Arrays.asList(categoria1)); 
 		
 		
-		repositorioCategoria.saveAll(Arrays.asList(categoria1,categoria2,categoria3));
+		repositorioCategoria.saveAll(Arrays.asList(categoria1,categoria2,categoria3,categoria4,categoria5,categoria6,categoria7,categoria8,categoria9));
 		repositorioProduto.saveAll(Arrays.asList(produto1,produto2,produto3));
 		
 		Estado estado1 = new Estado(null,"São Paulo");
