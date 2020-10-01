@@ -2,6 +2,7 @@ package br.com.jawebsites.vendas.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.jawebsites.vendas.domain.Categoria;
+import br.com.jawebsites.vendas.domain.dto.CategoriaDTO;
 import br.com.jawebsites.vendas.services.CategoriaService;
 
 @RestController
@@ -25,9 +27,10 @@ public class CategoriaResource {
 	
 	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> listar() {
+	public ResponseEntity<List<CategoriaDTO>> listar() {
 		List<Categoria> objeto = servico.listar();
-		return ResponseEntity.ok().body(objeto);
+		List<CategoriaDTO> lista = objeto.stream().map(x -> new CategoriaDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(lista);
 	}
 	
 	@GetMapping(value = "/{id}")
