@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.jawebsites.vendas.domain.Categoria;
 import br.com.jawebsites.vendas.repositories.CategoriaRepository;
+import br.com.jawebsites.vendas.services.exceptions.DataIntegrityException;
 import br.com.jawebsites.vendas.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -33,10 +35,15 @@ public class CategoriaService {
 		buscar(obj.getId());// ja faz a verificação do ID
 		return repositorio.save(obj);
 	}
-	
+	 
 	public void deletar(Integer id) {
 		buscar(id); // usando o metodo para verificar se existe o id
+		try {
 		repositorio.deleteById(id);
+		}
+		catch (DataIntegrityViolationException e){
+			throw new DataIntegrityException("A Categoria não pode ser Excluida porque tem produtos nela");
+		}
 	}
 }
  
