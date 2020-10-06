@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.jawebsites.vendas.domain.Categoria;
+import br.com.jawebsites.vendas.domain.Cliente;
 import br.com.jawebsites.vendas.domain.dto.CategoriaDTO;
 import br.com.jawebsites.vendas.repositories.CategoriaRepository;
 import br.com.jawebsites.vendas.services.exceptions.DataIntegrityException;
@@ -36,8 +37,9 @@ public class CategoriaService {
 		return repositorio.save(obj);
 	}
 	public Categoria alterar(Categoria obj) {
-		buscar(obj.getId());// ja faz a verificação do ID
-		return repositorio.save(obj);
+		Categoria novoObjeto = buscar(obj.getId());// ja faz a verificação do ID
+		atualizar(novoObjeto, obj);
+		return repositorio.save(novoObjeto);
 	}
 	 
 	public void deletar(Integer id) {
@@ -55,6 +57,9 @@ public class CategoriaService {
 	}
 	public Categoria aPartirDTO(CategoriaDTO objetoDTO) {
 		return new Categoria(objetoDTO.getId(),objetoDTO.getNome());
+	}
+	private void atualizar(Categoria novoCliente, Categoria obj) {
+		novoCliente.setNome(obj.getNome());
 	}
 	
 	
