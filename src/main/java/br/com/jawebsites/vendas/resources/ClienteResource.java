@@ -1,5 +1,6 @@
 package br.com.jawebsites.vendas.resources;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.jawebsites.vendas.domain.Cliente;
 import br.com.jawebsites.vendas.domain.dto.ClienteDTO;
+import br.com.jawebsites.vendas.domain.dto.NovoClienteDTO;
 import br.com.jawebsites.vendas.services.ClienteService;
 
 @RestController
@@ -61,6 +64,14 @@ public class ClienteResource {
 		Page<Cliente> objeto = servico.paginacao(pagina, linhaPorPagina, ordem, direcao);
 		Page<ClienteDTO> lista = objeto.map(x -> new ClienteDTO(x));
 		return ResponseEntity.ok().body(lista);
+	}
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> inserir(@Valid @RequestBody NovoClienteDTO objDTO){
+		Cliente objeto = servico.aPartirDTO(objDTO);
+		objeto = servico.inserir(objeto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(objeto.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 	
 	
