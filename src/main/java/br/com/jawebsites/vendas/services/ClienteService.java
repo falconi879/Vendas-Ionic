@@ -59,7 +59,7 @@ public class ClienteService {
 		repositorio.deleteById(id);
 		}
 		catch (DataIntegrityViolationException e){
-			throw new DataIntegrityException("A Cliente não pode ser Excluida porque tem produtos nela");
+			throw new DataIntegrityException("O Cliente não pode ser Excluida, Ele contem Pedidos");
 		}
 	}
 	public Page<Cliente> paginacao (Integer pagina, Integer linhaPorPagina, String ordem, String direcao){
