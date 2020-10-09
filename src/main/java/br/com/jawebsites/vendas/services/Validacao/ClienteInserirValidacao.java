@@ -6,12 +6,19 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.jawebsites.vendas.domain.Cliente;
 import br.com.jawebsites.vendas.domain.dto.NovoClienteDTO;
 import br.com.jawebsites.vendas.domain.enuns.TipoCliente;
+import br.com.jawebsites.vendas.repositories.ClienteRepository;
 import br.com.jawebsites.vendas.resources.exception.CampoErro;
 import br.com.jawebsites.vendas.services.Validacao.utils.BR;
 
 public class ClienteInserirValidacao implements ConstraintValidator<ClienteInserir, NovoClienteDTO> {
+	
+	@Autowired
+	private ClienteRepository repositorioCliente;
 	@Override
 	public void initialize(ClienteInserir ann) {
 	}
@@ -26,6 +33,10 @@ public class ClienteInserirValidacao implements ConstraintValidator<ClienteInser
 		}
 		if(objDto.getTipoCliente().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfCnpj())) {
 			list.add(new CampoErro("cpfCnpj", "CNPJ inválido!"));
+		}
+		Cliente auxiliar = repositorioCliente.findByEmail(objDto.getEmail());
+		if(auxiliar != null) {
+			list.add(new CampoErro("email", "Email ja existente!"));
 		}
 		
 		for (CampoErro e : list) {
